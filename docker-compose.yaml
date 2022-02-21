@@ -31,8 +31,22 @@ services:
     volumes:
       - ./nginx-backend2/html:/usr/share/nginx/html:ro
 
+  nginx-backend3:
+    image: nginx
+    networks:
+      - nginx-practice-network
+    volumes:
+      - ./nginx-backend3/html:/usr/share/nginx/html:ro
+
+  nginx-backend4:
+    image: nginx
+    networks:
+      - nginx-practice-network
+    volumes:
+      - ./nginx-backend4/html:/usr/share/nginx/html:ro
+
 networks:
   # docker network create nginx-practice-network
-  # 実際は
+  # 実際はComposeの仕様で親ディレクトリ+nginx-practice-networkという名前になる
   nginx-practice-network:
     driver: bridge
