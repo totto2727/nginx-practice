@@ -30,3 +30,5 @@ curl localhost -H "Host:nginx-backend2"
 127.0.0.1 nginx-backend1 nginx-backend2
 
 ```
+
+なおDockerが自動でこの設定をしてくれるため、同じネットワークに所属していれば、設定することなくサービス名で名前解決できます。
