@@ -1,12 +1,14 @@
 version: '3'
 
 services:
+  # docker run --net=nginx-practice-network -t --name=ubuntu ubuntu
   ubuntu:
     image: ubuntu
     networks:
       - nginx-practice-network
     tty: true
 
+  # docker run --net=nginx-practice-network -v `pwd`/nginx-frontend/html:/usr/share/nginx/html:ro -v `pwd`/nginx-frontend/conf.d:/etc/nginx/conf.d/:ro --name=nginx-frontend nginx
   nginx-frontend:
     image: nginx
     networks:
@@ -17,6 +19,7 @@ services:
     ports:
       - 80:80
 
+  # docker run --net=nginx-practice-network -v `pwd`/nginx-backend1/html:/usr/share/nginx/html:ro --name=nginx-backend1 nginx
   nginx-backend1:
     image: nginx
     networks:
@@ -24,6 +27,7 @@ services:
     volumes:
       - ./nginx-backend1/html:/usr/share/nginx/html:ro
 
+  # docker run --net=nginx-practice-network -v `pwd`/nginx-backend2/html:/usr/share/nginx/html:ro --name=nginx-backend2 nginx
   nginx-backend2:
     image: nginx
     networks:
@@ -31,6 +35,7 @@ services:
     volumes:
       - ./nginx-backend2/html:/usr/share/nginx/html:ro
 
+  # docker run --net=nginx-practice-network -v `pwd`/nginx-backend3/html:/usr/share/nginx/html:ro --name=nginx-backend3 nginx
   nginx-backend3:
     image: nginx
     networks:
@@ -38,6 +43,7 @@ services:
     volumes:
       - ./nginx-backend3/html:/usr/share/nginx/html:ro
 
+  # docker run --net=nginx-practice-network -v `pwd`/nginx-backend4/html:/usr/share/nginx/html:ro --name=nginx-backend4 nginx
   nginx-backend4:
     image: nginx
     networks:
@@ -47,6 +53,6 @@ services:
 
 networks:
   # docker network create nginx-practice-network
-  # 実際はComposeの仕様で親ディレクトリ+nginx-practice-networkという名前になる
+  # 実際はComposeの仕様で`{親ディレクトリ名}-nginx-practice-network`という名前になる
   nginx-practice-network:
     driver: bridge
