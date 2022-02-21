@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  ubuntu:
+    image: ubuntu
+    networks:
+      - nginx-practice-network
+    tty: true
+
+  nginx-frontend:
+    image: nginx
+    networks:
+      - nginx-practice-network
+    volumes:
+      - ./nginx-frontend/html:/usr/share/nginx/html:ro
+      - ./nginx-frontend/conf.d:/etc/nginx/conf.d/:ro
+    ports:
+      - 80:80
+
+  nginx-backend1:
+    image: nginx
+    networks:
+      - nginx-practice-network
+    volumes:
+      - ./nginx-backend1/html:/usr/share/nginx/html:ro
+
+  nginx-backend2:
+    image: nginx
+    networks:
+      - nginx-practice-network
+    volumes:
+      - ./nginx-backend2/html:/usr/share/nginx/html:ro
+
+networks:
+  # docker network create nginx-practice-network
+  # 実際は
+  nginx-practice-network:
+    driver: bridge
